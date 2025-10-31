@@ -1,4 +1,4 @@
-import type { Note } from "../types/note";
+import type { Category, Note } from "../types/note";
 import axios from "axios";
 
 const api = axios.create({
@@ -19,15 +19,30 @@ export interface FetchNotesResponse {
   totalPages: number;
 }
 
-export const fetchNotes = async ({
-  page = 1,
-  perPage = 12,
-  search = "",
-}: FetchNotesParams): Promise<FetchNotesResponse> => {
-  const res = await api.get<FetchNotesResponse>("/notes", {
-    params: { page, perPage, search },
+// export const fetchNotes = async ({
+//   page = 1,
+//   perPage = 12,
+//   search = "",
+// }: FetchNotesParams): Promise<FetchNotesResponse> => {
+//   const res = await api.get<FetchNotesResponse>("/notes", {
+//     params: { page, perPage, search },
+//   });
+//   return res.data;
+// };
+
+export interface NoteListType {
+  notes: Note[];
+  total: number;
+}
+
+export const fetchNotes = async (categoryId?: string, title?: string) => {
+  const { data } = await api.get<NoteListType>("/notes", {
+    params: {
+      categoryId,
+      title,
+    },
   });
-  return res.data;
+  return data;
 };
 
 export const deleteNote = async (id: string): Promise<Note> => {
@@ -49,4 +64,14 @@ export const createNote = async (noteData: {
 export const fetchNoteById = async (id: string) => {
   const res = await api.get<Note>(`/notes/${id}`);
   return res.data;
+};
+
+// export const getCategories = async () => {
+//   const { data } = await axios.get<CategoryNote[]>(`/categories`);
+//   return data;
+// };
+
+export const getCategories = async () => {
+  const { data } = await api.get<Category[]>("/categories");
+  return data;
 };

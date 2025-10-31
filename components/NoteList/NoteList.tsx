@@ -1,3 +1,4 @@
+"use client";
 import css from "./NoteList.module.css";
 import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { deleteNote } from "../../lib/api";

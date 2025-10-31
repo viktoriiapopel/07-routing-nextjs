@@ -19,3 +19,12 @@ export interface NoteUpdateData {
   content?: string;
   tag?: string;
 }
+
+export interface Category {
+  id: string;
+  title: string;
+  content: string;
+  tag: string;
+  createdAt: string;
+  updatedAt: string;
+}
