@@ -19,16 +19,6 @@ export interface FetchNotesResponse {
   totalPages: number;
 }
 
-// export const fetchNotes = async ({
-//   page = 1,
-//   perPage = 12,
-//   search = "",
-// }: FetchNotesParams): Promise<FetchNotesResponse> => {
-//   const res = await api.get<FetchNotesResponse>("/notes", {
-//     params: { page, perPage, search },
-//   });
-//   return res.data;
-// };
 export const fetchNotes = async ({
   tag,
   title,
@@ -45,9 +35,10 @@ export const fetchNotes = async ({
     perPage,
   };
 
-  if (tag && tag !== "all") params.tag = tag;
-  if (title) params.title = title;
+  if (tag && tag !== "all") params.search = tag;
+  if (title) params.search = title;
 
+  console.log("fetchNotes params:", params);
   const { data } = await api.get("/notes", { params });
   return data;
 };
@@ -56,16 +47,6 @@ export interface NoteListType {
   notes: Note[];
   totalPages: number;
 }
-
-// export const fetchNotes = async (categoryId?: string, title?: string) => {
-//   const { data } = await api.get<NoteListType>("/notes", {
-//     params: {
-//       categoryId,
-//       title,
-//     },
-//   });
-//   return data;
-// };
 
 export const deleteNote = async (id: string): Promise<Note> => {
   const res = await api.delete<Note>(`/notes/${id}`);
@@ -87,16 +68,6 @@ export const fetchNoteById = async (id: string) => {
   const res = await api.get<Note>(`/notes/${id}`);
   return res.data;
 };
-
-// export const getCategories = async () => {
-//   const { data } = await axios.get<CategoryNote[]>(`/categories`);
-//   return data;
-// };
-
-// export const getCategories = async () => {
-//   const { data } = await api.get<Category[]>("/categories");
-//   return data;
-// };
 
 const categories = [
   { id: "Work", title: "Work" },

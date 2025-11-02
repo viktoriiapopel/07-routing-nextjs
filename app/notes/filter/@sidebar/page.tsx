@@ -2,7 +2,6 @@ import { getCategories } from "@/lib/api";
 import { ALL_NOTES } from "@/lib/constants";
 import Link from "next/link";
 import css from "./SidebarNotes.module.css";
-import { Category } from "@/types/note";
 
 const SidebarNotes = async () => {
   const categories = await getCategories();
