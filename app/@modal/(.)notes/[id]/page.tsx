@@ -1,39 +1,22 @@
-// app/@modal/(.)notes/[id]/page.tsx
-
 import Modal from "@/components/Modal/Modal";
 import { fetchNoteById } from "@/lib/api";
+import NotePreview from "../../../../components/NotePreview/NotePreview";
 
-// type Props = {
-//   params: { id: string };
-// };
-
-// const NotePreview = async ({ params }: Props) => {
-//   const { id } = params;
-//   const note = await fetchNoteById(id);
-
-//   return (
-//     <Modal>
-//       <h2>{note.title}</h2>
-//       <p>{note.content}</p>
-//     </Modal>
-//   );
-// };
-
-// export default NotePreview;
 type Props = {
   params: { id: string };
 };
 
-const NotePreview = async ({ params }: Props) => {
-  const { id } = await params;
-  const note = await fetchNoteById(id);
+const NotePreviewPage = async ({ params }: Props) => {
+  const note = await fetchNoteById(params.id);
+
+  const handleClose = () => {
+    // Повернення на попередню сторінку
+    history.back();
+  };
 
   return (
-    <Modal>
-      <h2>{note.title}</h2>
-      <p>{note.content}</p>
+    <Modal onClose={handleClose}>
+      <NotePreview note={note} />
     </Modal>
   );
 };
-
-export default NotePreview;

@@ -1,3 +1,5 @@
+"use client";
+
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import css from "./NoteForm.module.css";
@@ -34,6 +36,8 @@ export default function NoteForm({ note, onClose }: NoteFormProps) {
       .oneOf(["Todo", "Work", "Personal", "Meeting", "Shopping"], "Invalid tag")
       .required("Required field"),
   });
+
+  console.log("Rendering NoteForm");
 
   return (
     <Formik
