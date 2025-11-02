@@ -29,21 +29,43 @@ export interface FetchNotesResponse {
 //   });
 //   return res.data;
 // };
+export const fetchNotes = async ({
+  tag,
+  title,
+  page = 1,
+  perPage = 12,
+}: {
+  tag?: string;
+  title?: string;
+  page?: number;
+  perPage?: number;
+} = {}) => {
+  const params: Record<string, string | number> = {
+    page,
+    perPage,
+  };
+
+  if (tag && tag !== "all") params.tag = tag;
+  if (title) params.title = title;
+
+  const { data } = await api.get("/notes", { params });
+  return data;
+};
 
 export interface NoteListType {
   notes: Note[];
-  total: number;
+  totalPages: number;
 }
 
-export const fetchNotes = async (categoryId?: string, title?: string) => {
-  const { data } = await api.get<NoteListType>("/notes", {
-    params: {
-      categoryId,
-      title,
-    },
-  });
-  return data;
-};
+// export const fetchNotes = async (categoryId?: string, title?: string) => {
+//   const { data } = await api.get<NoteListType>("/notes", {
+//     params: {
+//       categoryId,
+//       title,
+//     },
+//   });
+//   return data;
+// };
 
 export const deleteNote = async (id: string): Promise<Note> => {
   const res = await api.delete<Note>(`/notes/${id}`);
@@ -71,7 +93,18 @@ export const fetchNoteById = async (id: string) => {
 //   return data;
 // };
 
+// export const getCategories = async () => {
+//   const { data } = await api.get<Category[]>("/categories");
+//   return data;
+// };
+
+const categories = [
+  { id: "Work", title: "Work" },
+  { id: "Shopping", title: "Shopping" },
+  { id: "Tech", title: "Tech" },
+  { id: "Personal", title: "Personal" },
+];
+
 export const getCategories = async () => {
-  const { data } = await api.get<Category[]>("/categories");
-  return data;
+  return categories;
 };

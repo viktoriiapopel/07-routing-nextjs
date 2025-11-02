@@ -7,18 +7,20 @@ import { useState } from "react";
 interface SearchBoxProps {
   categoryid: string;
   onChange?: (value: string) => void;
+  value?: string;
 }
 
-const SearchBox = ({ categoryid, onChange }: SearchBoxProps) => {
+const SearchBox = ({ categoryid, onChange, value }: SearchBoxProps) => {
   const router = useRouter();
   const [title, setTitle] = useState("");
 
   const onSubmit = (formData: FormData) => {
     const title = formData.get("title") as string;
     router.push(
-      `/notes/filter/${categoryid === "ALL_NOTES" ? "" : categoryid}/${title}`
+      categoryid === "ALL_NOTES"
+        ? `/notes/filter/all/${title}`
+        : `/notes/filter/${categoryid}/${title}`
     );
-    // router.push(`/notes/filter/${categoryid}/${title}`);
   };
 
   return (
@@ -27,7 +29,7 @@ const SearchBox = ({ categoryid, onChange }: SearchBoxProps) => {
         className={css.input}
         type="text"
         placeholder="Search notes"
-        value={title}
+        value={value}
         onChange={(e) => {
           setTitle(e.target.value);
           onChange?.(e.target.value);

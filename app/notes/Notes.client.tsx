@@ -27,7 +27,7 @@ export default function App() {
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["notes", debouncedSearch, page],
-    queryFn: () => fetchNotes({ page, perPage: 12, search: debouncedSearch }),
+    queryFn: () => fetchNotes({ page, perPage: 12, title: debouncedSearch }),
     placeholderData: keepPreviousData,
   });
 
@@ -51,7 +51,11 @@ export default function App() {
   return (
     <div className={css.app}>
       <header className={css.toolbar}>
-        <SearchBox value={search} onChange={handleSearchChange} />
+        <SearchBox
+          value={search}
+          onChange={handleSearchChange}
+          categoryid={""}
+        />
 
         {totalPages > 1 && (
           <Pagination

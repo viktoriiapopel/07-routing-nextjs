@@ -48,15 +48,24 @@ import css from "./Modal.module.css";
 
 type Props = {
   children: React.ReactNode;
+  onClose?: () => void;
 };
 
-const Modal = ({ children }: Props) => {
+const Modal = ({ children, onClose }: Props) => {
   const router = useRouter();
 
-  const close = () => router.back();
+  const close = () => {
+    onClose?.();
+    router.back();
+  };
 
   return (
-    <div className={css.backdrop} role="dialog" aria-modal="true">
+    <div
+      className={css.backdrop}
+      role="dialog"
+      aria-modal="true"
+      onClick={close}
+    >
       <div className={css.modal}>{children}</div>
     </div>
   );

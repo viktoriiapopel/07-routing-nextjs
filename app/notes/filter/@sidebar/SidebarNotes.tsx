@@ -12,11 +12,11 @@ const SidebarNotes = async () => {
       <h2>Categories</h2>
       <ul className={css.menuList}>
         <li className={css.menuItem}>
-          <Link href={`/notes/filter/${ALL_NOTES}`} className={css.menuLint}>
+          <Link href={`/notes/filter/${ALL_NOTES}`} className={css.menuLink}>
             All
           </Link>
         </li>
-        {categories.map((item: Category) => (
+        {categories.map((item) => (
           <li key={item.id} className={css.menuItem}>
             <Link href={`/notes/filter/${item.id}`} className={css.menuLink}>
               {item.title}
