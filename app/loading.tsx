@@ -1,5 +1,7 @@
+import css from "./loading.module.css";
+
 const Loading = () => {
-  return <p>Loading, please wait...</p>;
+  return <p className={css.loadingMessage}>Loading, please wait...</p>;
 };
 
 export default Loading;

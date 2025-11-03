@@ -14,7 +14,6 @@ interface Props {
 
 export default function FilterClient({ notes, totalPages, categoryid }: Props) {
   const [currentPage, setCurrentPage] = useState(1);
-
   return (
     <>
       <SearchBox categoryid={categoryid} />

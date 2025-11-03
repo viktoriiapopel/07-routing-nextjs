@@ -1,4 +1,4 @@
-import { getCategories } from "@/lib/api";
+import { getCategories } from "@/app/notes/filter/[...slug]/api";
 import { ALL_NOTES } from "@/lib/constants";
 import Link from "next/link";
 import css from "./SidebarNotes.module.css";

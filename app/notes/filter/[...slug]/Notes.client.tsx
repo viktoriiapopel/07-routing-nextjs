@@ -5,15 +5,15 @@ import { useDebounce } from "use-debounce";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import css from "./NotesPage.module.css";
 
-import Modal from "../../components/Modal/Modal";
-import NoteForm from "../../components/NoteForm/NoteForm";
-import NoteList from "../../components/NoteList/NoteList";
-import Pagination from "../../components/Pagination/Pagination";
-import SearchBox from "../../components/SearchBox/SearchBox";
-import { fetchNotes } from "../../lib/api";
-import type { Note } from "../../types/note";
+import Modal from "../../../../components/Modal/Modal";
+import NoteForm from "../../../../components/NoteForm/NoteForm";
+import NoteList from "../../../../components/NoteList/NoteList";
+import Pagination from "../../../../components/Pagination/Pagination";
+import SearchBox from "../../../../components/SearchBox/SearchBox";
+import { fetchNotes } from "./api";
+import type { Note } from "../../../../types/note";
 
-export default function App() {
+export default function NotesClient({ tag }: { tag?: string }) {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
@@ -27,7 +27,8 @@ export default function App() {
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["notes", debouncedSearch, page],
-    queryFn: () => fetchNotes({ page, perPage: 12, title: debouncedSearch }),
+    queryFn: () =>
+      fetchNotes({ page, perPage: 12, title: debouncedSearch, tag }),
     placeholderData: keepPreviousData,
   });
 

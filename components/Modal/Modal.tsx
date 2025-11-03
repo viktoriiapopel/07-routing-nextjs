@@ -52,11 +52,8 @@ type Props = {
 };
 
 const Modal = ({ children, onClose }: Props) => {
-  const router = useRouter();
-
   const close = () => {
     onClose?.();
-    router.back();
   };
 
   return (
@@ -66,7 +63,9 @@ const Modal = ({ children, onClose }: Props) => {
       aria-modal="true"
       onClick={close}
     >
-      <div className={css.modal}>{children}</div>
+      <div className={css.modal} onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
     </div>
   );
 };

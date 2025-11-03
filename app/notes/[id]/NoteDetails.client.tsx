@@ -1,11 +1,12 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { fetchNoteById } from "../../../lib/api";
+import { fetchNoteById } from "../filter/[...slug]/api";
 import css from "./NoteDetails.client.module.css";
 
 interface NoteDetailsClientProps {
   noteid: string;
+  isModal?: boolean;
 }
 
 export default function NoteDetailsClient({ noteid }: NoteDetailsClientProps) {

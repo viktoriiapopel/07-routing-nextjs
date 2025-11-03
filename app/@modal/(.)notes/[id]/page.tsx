@@ -1,22 +1,30 @@
-import Modal from "@/components/Modal/Modal";
-import { fetchNoteById } from "@/lib/api";
-import NotePreview from "../../../../components/NotePreview/NotePreview";
+import { fetchNoteById } from "@/app/notes/filter/[...slug]/api";
+import NotePreview from "./NotePreview.client";
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
 
 type Props = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
 const NotePreviewPage = async ({ params }: Props) => {
-  const note = await fetchNoteById(params.id);
+  const { id: noteId } = await params;
 
-  const handleClose = () => {
-    // Повернення на попередню сторінку
-    history.back();
-  };
+  const queryClient = new QueryClient();
+
+  await queryClient.prefetchQuery({
+    queryKey: ["note", noteId],
+    queryFn: () => fetchNoteById(noteId),
+  });
 
   return (
-    <Modal onClose={handleClose}>
-      <NotePreview note={note} />
-    </Modal>
+    <HydrationBoundary state={dehydrate(queryClient)}>
+      <NotePreview noteId={noteId} />
+    </HydrationBoundary>
   );
 };
+
+export default NotePreviewPage;
