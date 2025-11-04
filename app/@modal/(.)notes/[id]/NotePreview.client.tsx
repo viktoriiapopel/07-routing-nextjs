@@ -5,7 +5,6 @@ import Modal from "@/components/Modal/Modal";
 import NoteDetailsClient from "@/app/notes/[id]/NoteDetails.client";
 
 interface NotePreviewProps {
-  // note: { id: string; title: string; content: string };
   noteId: string;
 }
 

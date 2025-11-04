@@ -15,7 +15,6 @@ const Header = () => {
           </li>
           <li>
             <Link href={`/notes/filter/${ALL_NOTES}`}>Notes</Link>
-            {/* <Link href="/notes">Notes</Link> */}
           </li>
         </ul>
       </nav>
