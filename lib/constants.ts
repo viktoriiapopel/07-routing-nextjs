@@ -1,1 +1,1 @@
-export const ALL_NOTES = "all";
+export const ALL_NOTES_FILTER = "all";

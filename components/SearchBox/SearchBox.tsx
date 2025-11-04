@@ -17,7 +17,7 @@ const SearchBox = ({ categoryid, onChange, value }: SearchBoxProps) => {
   const onSubmit = (formData: FormData) => {
     const title = formData.get("title") as string;
     router.push(
-      categoryid === "ALL_NOTES"
+      categoryid === "ALL_NOTES_FILTER"
         ? `/notes/filter/all/${title}`
         : `/notes/filter/${categoryid}/${title}`
     );
