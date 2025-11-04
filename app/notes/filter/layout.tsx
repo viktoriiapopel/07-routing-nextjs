@@ -7,7 +7,7 @@ export default function NotesLayout({
 }: Readonly<{
   children: React.ReactNode;
   sidebar: React.ReactNode;
-  modal: React.ReactNode;
+  modal?: React.ReactNode;
 }>) {
   return (
     <section className={css.container}>
