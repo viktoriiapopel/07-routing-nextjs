@@ -1,4 +1,4 @@
-import { fetchNotes } from "@/app/notes/filter/[...slug]/api";
+import { fetchNotes } from "@/lib/api";
 import { ALL_NOTES } from "@/lib/constants";
 // import FilterClient from "./FilterClient-disabled";
 import NotesClient from "./Notes.client";

@@ -24,7 +24,7 @@
 // }
 
 import NoteList from "@/components/NoteList/NoteList";
-import { fetchNotes } from "@/app/notes/filter/[...slug]/api";
+import { fetchNotes } from "../../lib/api";
 
 const Notes = async () => {
   const res = await fetchNotes();
