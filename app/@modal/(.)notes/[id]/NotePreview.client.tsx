@@ -5,6 +5,7 @@ import Modal from "@/components/Modal/Modal";
 import { fetchNoteById } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
 import css from "./NotePreview.module.css";
+import { useCallback } from "react";
 
 interface NotePreviewProps {
   noteId: string;
@@ -12,7 +13,9 @@ interface NotePreviewProps {
 
 export default function NotePreview({ noteId }: NotePreviewProps) {
   const router = useRouter();
-  const handleClose = () => router.back();
+  const closeModal = useCallback(() => {
+    router.back();
+  }, [router]);
 
   const {
     data: note,
@@ -29,7 +32,7 @@ export default function NotePreview({ noteId }: NotePreviewProps) {
   if (error || !note) return <p>Something went wrong.</p>;
 
   return (
-    <Modal onClose={handleClose}>
+    <Modal onClose={closeModal}>
       <div className={css.container}>
         <div className={css.item}>
           <div className={css.header}>
@@ -39,6 +42,9 @@ export default function NotePreview({ noteId }: NotePreviewProps) {
           <p className={css.date}>Created at: {note.createdAt}</p>
         </div>
       </div>
+      <button onClick={closeModal} className={css.backBtn}>
+        Close
+      </button>
     </Modal>
   );
 }
